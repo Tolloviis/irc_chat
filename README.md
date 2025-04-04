@@ -4,7 +4,6 @@ Repository irc chatille
 # Parannukset
 
 # Käyttäjänimien tunnistus ja hallinta
-Arvioitu aika tälle ehkä tunti?
-Kun koodi ajetaan, pyydetään käyttäjältä käyttäjänimeä...
+Kun koodi ajetaan, pyydetään käyttäjältä käyttäjänimeä, kun tämä on annettu, voi käyttäjä valita serverin jonne liittyä. Serverillä käyttäjänimi voisi lukea lähetettyjen viestien edessä.
 
 #
