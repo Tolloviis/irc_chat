@@ -17,6 +17,7 @@ def handle_client(conn, addr):
 
     # testikoodia #
     try:
+        # tämä printtaa kaikille clienteille listan servereistä
         server_list_str = "\n".join(f"{idx+1}. {ip}:{port}" for idx, (ip, port) in enumerate(servers))
         message = f"Connected to server.\nAvailable servers:\n{server_list_str}\n"
         conn.sendall(message.encode())
