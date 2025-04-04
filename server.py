@@ -17,8 +17,9 @@ def handle_client(conn, addr):
 
     # testikoodia #
     try:
-        server_list_str = "\n".join(f"{ip}:{port}" for ip, port in servers)
-        conn.sendall(f"Connected to server.\nAvailable servers:\n{server_list_str}\n".encode())
+        server_list_str = "\n".join(f"{idx+1}. {ip}:{port}" for idx, (ip, port) in enumerate(servers))
+        message = f"Connected to server.\nAvailable servers:\n{server_list_str}\n"
+        conn.sendall(message.encode())
     except:
         pass
     # testikoodia #
