@@ -9,6 +9,7 @@ server.bind((HOST, PORT))
 server.listen()
 
 clients = []
+servers = []
 
 def handle_client(conn, addr):
     print(f"New connection from {addr}")
