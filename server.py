@@ -9,11 +9,20 @@ server.bind((HOST, PORT))
 server.listen()
 
 clients = []
-servers = []
+servers = [("192.168.0.2", 5001), ("192.168.0.3", 5002)]    # Testausta varten pari serveriä
 
 def handle_client(conn, addr):
     print(f"New connection from {addr}")
     clients.append(conn)
+
+    # testikoodia #
+    try:
+        server_list_str = "\n".join(f"{ip}:{port}" for ip, port in servers)
+        conn.sendall(f"Connected to server.\nAvailable servers:\n{server_list_str}\n".encode())
+    except:
+        pass
+    # testikoodia #
+
     while True:
         try:
             msg = conn.recv(1024)
