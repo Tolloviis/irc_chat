@@ -17,11 +17,25 @@ def receive_messages():
         except:
             break
 
+def get_username():
+    while True:
+        username = input("Enter your username: ").strip()
+        if username:
+            return username
+        print("Username cannot be empty. Try again.")
+
+username = get_username()
+client.sendall(username.encode())
+
+response = client.recv(1024).decode()  # Receive the confirmation or server list
+print(response)  # Print the message from server
+
 thread = threading.Thread(target=receive_messages, daemon=True)
 thread.start()
 
+
 while True:
-    msg = input("> ")
+    msg = input(f"{username}> ")
     if msg.lower() == 'exit':
         break
     client.sendall(msg.encode())

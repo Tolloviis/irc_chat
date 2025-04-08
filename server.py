@@ -8,14 +8,19 @@ server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind((HOST, PORT))
 server.listen()
 
-clients = []
+clients = {}
 servers = [("192.168.0.2", 5001), ("192.168.0.3", 5002)]    # Testausta varten pari serveriä
 
 def handle_client(conn, addr):
     print(f"New connection from {addr}")
-    clients.append(conn)
 
     # testikoodia #
+    try:
+        username = conn.recv(1024).decode().strip()
+        clients[conn] = username
+        print(f"{username} has connected from {addr}")
+    except:
+        clients[conn] = "Unknown"
     try:
         # tämä printtaa kaikille clienteille listan servereistä
         server_list_str = "\n".join(f"{idx+1}. {ip}:{port}" for idx, (ip, port) in enumerate(servers))
@@ -30,14 +35,16 @@ def handle_client(conn, addr):
             msg = conn.recv(1024)
             if not msg:
                 break
-            print(f"{addr} says: {msg.decode()}")
+            full_msg = f"{clients[conn]} says: {msg.decode()}"
+            print(full_msg)
+
             for client in clients:
                 if client != conn:
-                    client.sendall(msg)
+                    client.sendall(full_msg.encode())
         except:
             break
 
-    clients.remove(conn)
+    del clients[conn]
     conn.close()
     print(f"Connection closed: {addr}")
 
