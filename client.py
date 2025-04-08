@@ -27,8 +27,8 @@ def get_username():
 username = get_username()
 client.sendall(username.encode())
 
-response = client.recv(1024).decode()  # Receive the confirmation or server list
-print(response)  # Print the message from server
+response = client.recv(1024).decode()  # Tavallaan oottaa vastausta serveriltä jotta nää ei mee jotenki tyhmästi päällekkäin
+print(response)  # printtaa serverit ja jotain
 
 thread = threading.Thread(target=receive_messages, daemon=True)
 thread.start()
