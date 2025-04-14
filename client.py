@@ -7,13 +7,18 @@ PORT = 5000
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client.connect((HOST, PORT))
 
+bold_start = "\033[1m"
+bold_end = "\033[0m"
+
 def receive_messages():
     while True:
         try:
             msg = client.recv(1024)
             if not msg:
                 break
-            print(f"\n{msg.decode()}\n> ", end="")
+            print(f"\n{msg.decode()}\n> ", end="") 
+            if msg.startswith("b."):
+                print(f"\n{bold_start}{msg.decode()}{bold_end}\n> ", end="")
         except:
             break
 
