@@ -16,7 +16,7 @@ def receive_messages():
             msg = client.recv(1024)
             if not msg:
                 break
-            print(f"\n{msg.decode()}\n> ", end="") 
+            print(f"\n{msg.decode()}\n> ", end="")
             if msg.startswith("b."):
                 print(f"\n{bold_start}{msg.decode()}{bold_end}\n> ", end="")
         except:
